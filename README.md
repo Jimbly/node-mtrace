@@ -27,11 +27,20 @@ is "mtrace.[pid].0", etc).
 ## Viewing the mtrace log
 
 There's a built-in command line tool that's part of GCC called mtrace.  I find
-its output completely uselss in any real-world applications (lists thousands or
+its output rather uselss in any real-world application (lists thousands or
 millions of allocations in an unsorted list, and has meager symbol lookup).
 Your mileage on this may vary.
 
+The raw log can however sometimes be very useful for tracking harder to
+identify allocations (like those that show up as just "operator new" from C++
+files) by looking at allocation sizes and patterns and comparing them to known
+structure sizes, etc.
+
 This module includes a simple little parser to generate summarized information
+showing useful high-level information on outstanding allocations.  The
+"Traffic" column indicates total alloc/free events from that call site, which
+can be useful for tracking performance-impacting heap thrashing.
+
 ```
 $ node mtrace.js mtrace.1234.0
 Addr       Size       Count  Traffic  Module                            Symbol                                            Offs
@@ -51,8 +60,9 @@ Addr       Size       Count  Traffic  Module                            Symbol  
 
 Or, even better, if the process the mtrace was dumped from is still running, we
 can get very accurate symbol information by specifying a pid:
+
 ```
-$ node mtrace.js mtrace.1234.0 pid
+$ node mtrace.js mtrace.1234.0 1234
 Addr       Size       Count  Traffic  Module                            Symbol
 ---------  ---------  -----  -------  --------------------------------  ------------------------------------------------
  0xd0c080   15 bytes      1      197  /lib/tls/i686/cmov/libc.so.6      strdup
