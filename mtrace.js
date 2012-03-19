@@ -195,10 +195,16 @@ function finishedParsing() {
               continue;
             }
             idx += tag.length;
-            var end_idx = stdout.indexOf('\n', idx) || stdout.length;
+            var end_idx = stdout.indexOf('\n', idx);
+            if (end_idx === -1) {
+              end_idx = stdout.length;
+            }
             if (end_idx === idx) {
               ++idx;
-              end_idx = stdout.indexOf('\n', idx) || stdout.length;
+              end_idx = stdout.indexOf('\n', idx);
+              if (end_idx === -1) {
+                end_idx = stdout.length;
+              }
             }
             var line = stdout.slice(idx, end_idx);
             if (line.slice(0, 9) === 'No symbol') {
