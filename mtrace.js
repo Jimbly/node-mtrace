@@ -187,7 +187,6 @@ function finishedParsing() {
             console.error('Error running gdb: ' + err);
             return finish();
           }
-          console.log(stdout);
           for (var site_addr in addr) {
             var tag = prefix + site_addr + ':';
             var idx = stdout.indexOf(tag);
