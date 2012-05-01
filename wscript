@@ -24,4 +24,7 @@ def shutdown():
   else:
     if exists('build/Release/mtrace.node') and not exists('mtrace.node'):
       symlink('build/Release/mtrace.node', 'mtrace.node')
+    else:
+			if exists('build/default/mtrace.node') and not exists('mtrace.node'):
+      	symlink('build/default/mtrace.node', 'mtrace.node')
 
