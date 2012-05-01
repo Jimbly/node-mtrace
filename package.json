@@ -1,0 +1,27 @@
+{
+  "name": "mtrace",
+  "description": "Native memory allocation tracing and mtrace log parsing for node.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Jimbly/node-mtrace",
+  "author": "Jimb Esser (https://github.com/Jimbly)",
+  "contributors": [
+    "Christophe Robin <crobin@nekoo.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jimbly/node-mtrace.git"
+  },
+  "bin": {
+    "mtrace.js": "lib/mtrace.js"
+  },
+  "main": "mtrace",
+  "dependencies": {
+    "easy-table": "0.0.3"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "scripts": {
+    "install": "node-waf configure build"
+  }
+}
