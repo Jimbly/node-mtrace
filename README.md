@@ -4,7 +4,10 @@ Native memory tracing and mtrace log parsing for node.
 
 ## Usage
 
-Build with node-waf.
+Install with npm:
+```npm install mtrace```
+
+Or build with node-waf.
 
 Generating a mtrace:
 
