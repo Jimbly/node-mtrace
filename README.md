@@ -86,16 +86,13 @@ a node app, just change the one reference to "node" in mtrace.js (one of the
 arguments to gdb) to your executable, or let me know and I can make it take it
 as a parameter.
 
-If you want to convert this module to use node-gyp and/or be npm-friendly (I
-know nothing of either at the moment, we use our own custom build system),
-please send me a pull request!
-
 ## Requirements
 
 Tested on Ubuntu, should work on any flavor of Linux.
 
-Requites gdb to be installed to get good symbol information.
+Requires gdb to be installed to get good symbol information.
 
 ## Special Thanks
 
-Uses a modified version of [easy-table](https://github.com/eldargab/easy-table).
+Uses [easy-table](https://github.com/eldargab/easy-table).
+NPM packaging by [christopherobin](https://github.com/christopherobin).
