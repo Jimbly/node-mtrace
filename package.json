@@ -1,7 +1,7 @@
 {
   "name": "mtrace",
   "description": "Native memory allocation tracing and mtrace log parsing for node.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/Jimbly/node-mtrace",
   "author": "Jimb Esser (https://github.com/Jimbly)",
   "contributors": [
@@ -22,6 +22,6 @@
     "node": ">=0.4.0"
   },
   "scripts": {
-    "install": "node-waf configure build"
+    "install": "node-gyp configure build"
   }
 }

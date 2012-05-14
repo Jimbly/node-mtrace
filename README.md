@@ -7,7 +7,7 @@ Native memory tracing and mtrace log parsing for node.
 Install with npm:
 ```npm install mtrace```
 
-Or build with node-waf.
+Or build with node-gyp.
 
 Generating a mtrace:
 
@@ -95,4 +95,4 @@ Requires gdb to be installed to get good symbol information.
 ## Special Thanks
 
 Uses [easy-table](https://github.com/eldargab/easy-table).
-NPM packaging by [christopherobin](https://github.com/christopherobin).
+Initial NPM packaging by [christopherobin](https://github.com/christopherobin).
