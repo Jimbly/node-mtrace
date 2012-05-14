@@ -1,3 +1,2 @@
-.lock-wscript
 build
-mtrace.node
+npm-debug.log

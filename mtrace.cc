@@ -1,4 +1,4 @@
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__CYGWIN__)
 // mtrace doesn't seem to exist on OSX, simply have this module do nothing
 #define DISABLED
 #endif

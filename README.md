@@ -7,12 +7,10 @@ Native memory tracing and mtrace log parsing for node.
 Install with npm:
 ```npm install mtrace```
 
-Or build with node-gyp.
-
 Generating a mtrace:
 
 ``` javascript
-var mtrace = require('mtrace.node');
+var mtrace = require('mtrace');
 var filename = mtrace.mtrace();
 console.log('Saving mtrace to ' + filename);
 // do stuff
@@ -45,7 +43,7 @@ showing useful high-level information on outstanding allocations.  The
 can be useful for tracking performance-impacting heap thrashing.
 
 ```
-$ node mtrace.js mtrace.1234.0
+$ ./node_modules/.bin/mtrace.js mtrace.1234.0
 Addr       Size       Count  Traffic  Module                            Symbol                                            Offs
 ---------  ---------  -----  -------  --------------------------------  ------------------------------------------------  ------
  0xd0c080   15 bytes      1      197  /lib/tls/i686/cmov/libc.so.6      __strdup                                          +0x30
@@ -65,7 +63,7 @@ Or, even better, if the process the mtrace was dumped from is still running, we
 can get very accurate symbol information by specifying a pid:
 
 ```
-$ node mtrace.js mtrace.1234.0 1234
+$ ./node_modules/.bin/mtrace.js mtrace.1234.0 1234
 Addr       Size       Count  Traffic  Module                            Symbol
 ---------  ---------  -----  -------  --------------------------------  ------------------------------------------------
  0xd0c080   15 bytes      1      197  /lib/tls/i686/cmov/libc.so.6      strdup
