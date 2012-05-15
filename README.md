@@ -92,5 +92,5 @@ Requires gdb to be installed to get good symbol information.
 
 ## Special Thanks
 
-Uses [easy-table](https://github.com/eldargab/easy-table).
+Uses [easy-table](https://github.com/eldargab/easy-table).  
 Initial NPM packaging by [christopherobin](https://github.com/christopherobin).
