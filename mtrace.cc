@@ -1,4 +1,4 @@
-#if defined(__APPLE__) || defined(__CYGWIN__)
+#if defined(__APPLE__) || defined(__CYGWIN__) || defined(WIN32)
 // mtrace doesn't seem to exist on OSX, simply have this module do nothing
 #define DISABLED
 #endif
@@ -8,10 +8,10 @@
 
 #ifndef DISABLED
 #include <mcheck.h>
+#include <unistd.h>
 #endif
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string>
 
 using namespace v8;
@@ -56,11 +56,14 @@ static Handle<Value> wrapMUnTrace(const Arguments &args) {
 	return Undefined();
 }
 
-extern "C"
-void init( Handle<Object> target ) {
-	HandleScope scope;
+extern "C" {
+  static void init(Handle<Object> module_exports) {
+    HandleScope scope;
 
-	NODE_SET_METHOD(target, "mtrace", wrapMTrace);
-	NODE_SET_METHOD(target, "muntrace", wrapMUnTrace);
-	NODE_SET_METHOD(target, "gc", GC);
+		NODE_SET_METHOD(module_exports, "mtrace", wrapMTrace);
+		NODE_SET_METHOD(module_exports, "muntrace", wrapMUnTrace);
+		NODE_SET_METHOD(module_exports, "gc", GC);
+  }
+
+  NODE_MODULE(mtrace, init);
 }
