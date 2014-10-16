@@ -2,6 +2,10 @@
 
 Native memory tracing and mtrace log parsing for node.
 
+## Supported Platforms
+
+Linux only.
+
 ## Usage
 
 Install with npm:
@@ -12,7 +16,11 @@ Generating a mtrace:
 ``` javascript
 var mtrace = require('mtrace');
 var filename = mtrace.mtrace();
-console.log('Saving mtrace to ' + filename);
+if (filename) {
+  console.log('Saving mtrace to ' + filename);
+} else {
+  console.log('mtrace not supported');
+}
 // do stuff
 // exit program, or, force a flush
 mtrace.gc(); // Optionally force a garbage collect so destructors are called
