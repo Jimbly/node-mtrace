@@ -3,8 +3,7 @@
 #define DISABLED
 #endif
 
-#include <v8.h>
-#include <node.h>
+#include <nan.h>
 
 #ifndef DISABLED
 #include <mcheck.h>
@@ -14,15 +13,17 @@
 #include <stdlib.h>
 #include <string>
 
-using namespace v8;
 using namespace node;
+using namespace v8;
 
-static Handle<Value> GC(const Arguments& args) {
-	while (!V8::IdleNotification());
-	return Undefined();
+NAN_METHOD(GC) {
+	NanScope();
+	while (!NanIdleNotification(500));
+	NanReturnValue(NanUndefined());
 }
 
-static Handle<Value> wrapMTrace(const Arguments &args) {
+NAN_METHOD(wrapMTrace) {
+	NanScope();
 #ifndef DISABLED
 	const char *filename;
 	std::string sfilename;
@@ -42,23 +43,24 @@ static Handle<Value> wrapMTrace(const Arguments &args) {
 	setenv("MALLOC_TRACE", filename, 1);
 
 	mtrace();
-	return String::New(filename);
+	NanReturnValue(NanNew<String>(filename));
 #else
-	return Undefined();
+	NanReturnValue(NanUndefined());
 #endif
 }
 
-static Handle<Value> wrapMUnTrace(const Arguments &args) {
+NAN_METHOD(wrapMUnTrace) {
+	NanScope();
 #ifndef DISABLED
 	muntrace();
 #endif
 
-	return Undefined();
+	NanReturnValue(NanUndefined());
 }
 
 extern "C" {
   static void init(Handle<Object> module_exports) {
-    HandleScope scope;
+		NanScope();
 
 		NODE_SET_METHOD(module_exports, "mtrace", wrapMTrace);
 		NODE_SET_METHOD(module_exports, "muntrace", wrapMUnTrace);
