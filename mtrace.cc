@@ -16,21 +16,21 @@
 using namespace node;
 using namespace v8;
 
-NAN_METHOD(GC) {
-	NanScope();
-	while (!NanIdleNotification(500));
-	NanReturnValue(NanUndefined());
+NAN_METHOD(GCMTrace) {
+	Nan::HandleScope scope;
+	while (!Nan::IdleNotification(500));
+	info.GetReturnValue().SetUndefined();
 }
 
 NAN_METHOD(wrapMTrace) {
-	NanScope();
+	Nan::HandleScope scope;
 #ifndef DISABLED
 	const char *filename;
 	std::string sfilename;
 	char buf[64];
-	if (args.Length() >= 1 && args[0]->IsString()) {
+	if (info.Length() >= 1 && info[0]->IsString()) {
 		// get filename
-		String::Utf8Value utf8_value(args[0]);
+		String::Utf8Value utf8_value(info[0]);
 		sfilename.assign(*utf8_value);
 		filename = sfilename.c_str();
 	} else {
@@ -43,28 +43,28 @@ NAN_METHOD(wrapMTrace) {
 	setenv("MALLOC_TRACE", filename, 1);
 
 	mtrace();
-	NanReturnValue(NanNew<String>(filename));
+	info.GetReturnValue().Set(Nan::New<String>(filename).ToLocalChecked());
 #else
-	NanReturnValue(NanUndefined());
+	info.GetReturnValue().SetUndefined();
 #endif
 }
 
 NAN_METHOD(wrapMUnTrace) {
-	NanScope();
+	Nan::HandleScope scope;
 #ifndef DISABLED
 	muntrace();
 #endif
 
-	NanReturnValue(NanUndefined());
+	info.GetReturnValue().SetUndefined();
 }
 
 extern "C" {
-  static void init(Handle<Object> module_exports) {
-		NanScope();
-
-		NODE_SET_METHOD(module_exports, "mtrace", wrapMTrace);
-		NODE_SET_METHOD(module_exports, "muntrace", wrapMUnTrace);
-		NODE_SET_METHOD(module_exports, "gc", GC);
+  NAN_MODULE_INIT(init) {
+		Nan::HandleScope scope;
+		
+		Nan::Set(target, Nan::New("mtrace").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(wrapMTrace)).ToLocalChecked() );
+		Nan::Set(target, Nan::New("muntrace").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(wrapMUnTrace)).ToLocalChecked());
+		Nan::Set(target, Nan::New("gc").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(GCMTrace)).ToLocalChecked());
   }
 
   NODE_MODULE(mtrace, init);
