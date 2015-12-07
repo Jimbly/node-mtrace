@@ -1,12 +1,13 @@
 {
   "name": "mtrace",
   "description": "Native memory allocation tracing and mtrace log parsing for node.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://github.com/Jimbly/node-mtrace",
   "author": "Jimb Esser (https://github.com/Jimbly)",
   "contributors": [
     "Christophe Robin <crobin@nekoo.com>",
-    "Vincent Giersch <https://github.com/gierschv>"
+    "Vincent Giersch (https://github.com/gierschv)",
+    "magicode (https://github.com/magicode)"
   ],
   "repository": {
     "type": "git",
