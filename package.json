@@ -18,7 +18,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "easy-table": "0.0.3",
+    "easy-table": "^1.1.0",
     "nan": "^2.1.0"
   },
   "engines": {
